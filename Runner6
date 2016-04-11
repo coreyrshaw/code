@@ -1,0 +1,329 @@
+ import java.util.Scanner; 
+
+       public class Day6Runners { 
+	   public static void main(String[] args)throws Exception{ 
+ 
+        long sleepTime = 400;
+
+		clearScreen();
+        System.out.println("Welcome to Test Drive.com");
+        System.out.println("What is your name test driver ? ");
+        
+   
+	    Scanner lineScannerName = new Scanner(System.in);
+        String givenName = lineScannerName.nextLine();
+        Thread.sleep(sleepTime);
+        clearScreen();
+
+
+
+        System.out.println("Glad to have you here " + givenName + ". " + "Get ready for an experience you will never foget !");
+        System.out.println("Let's get you started by choosing a car type from the list below.");
+        System.out.println("                                                                 ");
+        System.out.println("1. Sports Car Model , 2. Mini Van  Model, 3. Old Car Model ");
+
+        
+	    Scanner lineScannerCarType = new Scanner(System.in);
+        String carType = lineScannerCarType.nextLine();
+        Thread.sleep(sleepTime);
+        clearScreen();
+
+
+               if(carType.equals ("1")) {
+
+		    sportsCarChoice();}
+
+}
+       
+
+
+public static void clearScreen() throws Exception { 
+	new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+
+	 }
+        
+
+
+
+ public static void simpleCarGame()throws Exception{
+  
+             long sleepTime = 400;
+
+
+
+     //ADD ARRAY CODE HERE
+
+              SimpleCar[] allMySimpleCars = new SimpleCar[3];
+
+        for (int carIndex = 0; carIndex < 3; carIndex++) {
+	        System.out.println("Choose your luxury car make that you would like to drive ?");	    
+
+	        Scanner lineScannerChoiceofMake = new Scanner(System.in);
+	        String carMake = lineScannerChoiceofMake.nextLine();
+	        Thread.sleep(sleepTime);
+	        clearScreen();
+
+	        System.out.println("Now what's your luxury car model for the ?");
+		
+	        Scanner lineScannerChoiceofModel = new Scanner(System.in);
+	        String carModel = lineScannerChoiceofModel.nextLine();
+	        Thread.sleep(sleepTime);
+	        clearScreen();
+	        
+	        System.out.println("Now what's your color for your luxury car.");
+		   
+	        Scanner lineScannerChoiceofColor = new Scanner(System.in);
+	        String carColor = lineScannerChoiceofColor.nextLine();
+	        Thread.sleep(sleepTime);
+	        clearScreen();
+
+	        SimpleCar myCar = new SimpleCar(carColor, carMake, carModel);
+	        allMySimpleCars[carIndex] = myCar;
+         } 
+
+            System.out.println( "Congratulations you have chosen to ride these brand new cars below .");   
+
+        /* Prompt the user to pick a car
+            Assign that car to a number, like 1, 2, 3
+            The user picks 1, 2 or 3: SAVE THAT TO A VARIABLE
+            String userPick = lineScanner.nextLine();
+
+            if (userPick.equals("1")) {
+	yourCar = car1;
+            }
+
+            				OR
+
+            	yourCar = allMySimpleCars[userPick -1]
+			*/
+
+         
+
+         //stored information for cars
+        // System.out.println( "Congratulations you have chosen to ride these brand new cars below .");
+
+       // System.out.println( "Let's get ready to testdrive, choose which car you want to drive.");
+
+
+
+        while (true) { 
+
+	    	System.out.println("Here are your cars - please choose one"); 
+	    	for (int carIndex = 0; carIndex < 3; carIndex++) { 
+		        System.out.println("Car " + (carIndex + 1) + " is a "+ allMySimpleCars[carIndex].color+ allMySimpleCars[carIndex].make+allMySimpleCars[carIndex].model);
+	    	}
+	    	System.out.println("Which one would you like to drive?"); 
+
+	        Scanner carChoiceScanner = new Scanner(System.in);
+	        String carChoice = carChoiceScanner.nextLine();
+
+	        int carChoiceIndex = Integer.parseInt(carChoice) -1;
+         	if (carChoiceIndex == -1) { 
+         			break; 
+         	}
+
+
+	         while (true) { 
+			     SimpleCar yourCar = allMySimpleCars[carChoiceIndex]; 
+		         System.out.println( "Now choose what would you like to do from the list below .");
+		         System.out.println( "Option 1 : Start car.");
+		         System.out.println( "Option 2 : Stop car to pick up girls.");
+		         System.out.println ("Option 3 : Accelerate car.");
+		         System.out.println ("Option 4 : Brake car.");
+		         System.out.println ("Option 5 : View car dashboard");
+		         System.out.println ("Option 6 : Fuel car.");
+		         System.out.println ("Option 7 : Exit car.");
+		         System.out.println ("Option 8 : Manually accelerate car.");
+                 System.out.println ("Option 9 : View car animation.");
+			    
+		         Scanner lineScannerChoiceofAction = new Scanner(System.in);
+		         String action = lineScannerChoiceofAction.nextLine();
+		         Thread.sleep(sleepTime);
+		         clearScreen();
+
+		        if(action.equals ("1")) {
+				   	yourCar.startCar();
+		        }
+
+		        if(action.equals ("2")) {
+		   	    	yourCar.stopCar();
+		        }
+
+		        if(action.equals ("3")) {
+		        	try {
+		   	     		yourCar.accelerate();
+		         	} catch (Exception exception) { 
+					    System.out.println("Please start your car before you accelerate."); 
+		          		exception.printStackTrace(); 
+		        	}
+		        } 
+
+		   	    if(action.equals ("4")) {
+		   	    	try {
+				   	    yourCar.brake();
+		        	} catch (Exception exception) { 
+		        		System.out.println("Please start your car before you brake."); 
+		         		exception.printStackTrace(); 
+		         	}
+		        } 
+
+
+		        if(action.equals ("8")) {
+		        	try {
+		   	     		yourCar.manuallyAccelerate();
+		         	}  catch (Exception exception) { 
+		          		System.out.println("Please start your car before you manually accelerate."); 
+		          		exception.printStackTrace(); 
+		         	}
+		        } 
+
+		   	    if(action.equals ("5")) {
+			   	   yourCar.printInfo();
+		        }
+		        
+		        if(action.equals ("6")) {
+		        	try {
+		   	   				yourCar.fuelUp();
+		   	  		} catch (Exception exception) { 
+		          		System.out.println("Please start your car before you brake."); 
+		          		exception.printStackTrace(); 
+		          	}
+		        }
+
+		         if(action.equals ("9")) {
+			   	   yourCar.showCarAnimation();
+		        }
+		        
+		        if(action.equals ("7")) {
+				   yourCar.exit();
+				   break; 
+		         }
+	       } // end while (true) for all the commands
+
+
+        } // end of while(true) for all the cars
+	}
+        
+
+      public static void sportsCarChoice()throws Exception{
+          long sleepTime = 400;
+
+
+
+     //ADD ARRAY CODE HERE
+
+              SimpleCar allMySimpleCars = new SportsCar();
+
+       
+
+        /* Prompt the user to pick a car
+            Assign that car to a number, like 1, 2, 3
+            The user picks 1, 2 or 3: SAVE THAT TO A VARIABLE
+            String userPick = lineScanner.nextLine();
+
+            if (userPick.equals("1")) {
+	yourCar = car1;
+            }
+
+            				OR
+
+            	yourCar = allMySimpleCars[userPick -1]
+			*/
+
+         
+
+         //stored information for cars
+        // System.out.println( "Congratulations you have chosen to ride these brand new cars below .");
+
+       // System.out.println( "Let's get ready to testdrive, choose which car you want to drive.");
+
+
+
+
+	         while (true) { 
+			     SimpleCar yourCar = allMySimpleCars; 
+		         System.out.println( "Now choose what would you like to do from the list below .");
+		         System.out.println( "Option 1 : Start car.");
+		         System.out.println( "Option 2 : Stop car to pick up girls.");
+		         System.out.println ("Option 3 : Accelerate car.");
+		         System.out.println ("Option 4 : Brake car.");
+		         System.out.println ("Option 5 : View car dashboard");
+		         System.out.println ("Option 6 : Fuel car.");
+		         System.out.println ("Option 7 : Exit car.");
+		         System.out.println ("Option 8 : Manually accelerate car.");
+                 System.out.println ("Option 9 : View car animation.");
+			    
+		         Scanner lineScannerChoiceofAction = new Scanner(System.in);
+		         String action = lineScannerChoiceofAction.nextLine();
+		         Thread.sleep(sleepTime);
+		         clearScreen();
+
+		        if(action.equals ("1")) {
+				   	yourCar.startCar();
+		        }
+
+		        if(action.equals ("2")) {
+		   	    	yourCar.stopCar();
+		        }
+
+		        if(action.equals ("3")) {
+		        	try {
+		   	     		yourCar.accelerate();
+		         	} catch (Exception exception) { 
+					    System.out.println("Please start your car before you accelerate."); 
+		          		exception.printStackTrace(); 
+		        	}
+		        } 
+
+		   	    if(action.equals ("4")) {
+		   	    	try {
+				   	    yourCar.brake();
+		        	} catch (Exception exception) { 
+		        		System.out.println("Please start your car before you brake."); 
+		         		exception.printStackTrace(); 
+		         	}
+		        } 
+
+
+		        if(action.equals ("8")) {
+		        	try {
+		   	     		yourCar.manuallyAccelerate();
+		         	}  catch (Exception exception) { 
+		          		System.out.println("Please start your car before you manually accelerate."); 
+		          		exception.printStackTrace(); 
+		         	}
+		        } 
+
+		   	    if(action.equals ("5")) {
+			   	   yourCar.printInfo();
+		        }
+		        
+		        if(action.equals ("6")) {
+		        	try {
+		   	   				yourCar.fuelUp();
+		   	  		} catch (Exception exception) { 
+		          		System.out.println("Please start your car before you brake."); 
+		          		exception.printStackTrace(); 
+		          	}
+		        }
+
+		         if(action.equals ("9")) {
+			   	   yourCar.showCarAnimation();
+		        }
+		        
+		        if(action.equals ("7")) {
+				   yourCar.exit();
+				   break; 
+		         }
+	       } // end while (true) for all the commands
+
+
+        } // end of while(true) for all the cars
+	
+
+
+
+     
+
+
+}
